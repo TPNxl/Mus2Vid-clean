@@ -75,6 +75,7 @@ class ImageDisplayThreadWithAmpTracking(threading.Thread):
                 self.output_image = self.past_image
                 self.blending = True
                 self.blend_time_reset = False
+                self.image_thread.refresh_prompt = True
             else:
                 self.output_image = self.current_image
         else:

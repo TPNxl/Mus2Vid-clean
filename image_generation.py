@@ -114,6 +114,9 @@ class ImageGenerationThread(threading.Thread):
         self.uninit = True
         self.display_func = display_func
 
+        self.refresh_prompt = True
+        self.last_prompt = ""
+
         self.stop_request = False
 
     def set_negative_prompt(self, prompt):
@@ -131,7 +134,11 @@ class ImageGenerationThread(threading.Thread):
                     self.Prompt_Thread.prompt is None or self.Prompt_Thread.prompt == "" or self.Prompt_Thread.prompt == "Blank screen"):
 
                 # get prompt
-                prompt = self.Prompt_Thread.prompt
+                if self.refresh_prompt or self.Prompt_Thread.prompt :
+                    self.last_prompt = self.Prompt_Thread.prompt
+                    self.refresh_prompt = False
+
+                prompt = self.last_prompt
 
                 # generate image
                 if self.img2img:  # send previous image as an arg

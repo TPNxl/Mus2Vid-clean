@@ -63,6 +63,8 @@ def main():
         print("============== Prompt started")
         Img_Thread.start()
         print("============== Img started")
+        Display_Thread.start()
+        print("=======s======= Display started")
         start = time.time()
         while True:
             print("\n\n")
